@@ -1,27 +1,38 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { db, storage, auth } from '../firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { signOut } from 'firebase/auth';
 
 function NewsPostPage() {
-  const [title, setTitle] = useState('');  // タイトル・題名
-  const [content, setContent] = useState('');  // 本文
-  const [image, setImage] = useState(null);  // 画像添付
-  const [date, setDate] = useState('');  // 日付選択
-  const [url, setUrl] = useState('');    // URL
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
+  const [image, setImage] = useState(null);
+  const [date, setDate] = useState('');
+  const [url, setUrl] = useState('');
+  const [category, setCategory] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('content', content);
-    if (image) {
-      formData.append('image', image); // 画像は任意
-    }
-    formData.append('date', date);
-    formData.append('url', url);
+    let imageUrl = '';
 
     try {
-      await axios.post('http://localhost/api/news_post.php', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+      if (image) {
+        const imageRef = ref(storage, `news_images/${image.name}`);
+        await uploadBytes(imageRef, image);
+        imageUrl = await getDownloadURL(imageRef);
+      }
+
+      await addDoc(collection(db, 'news'), {
+        title,
+        content,
+        imageUrl,
+        date_posted: date,
+        url,
+        category, // カテゴリ
+        createdAt: serverTimestamp(),
+      });
 
       alert('投稿が完了しました！');
       setTitle('');
@@ -29,11 +40,35 @@ function NewsPostPage() {
       setImage(null);
       setDate('');
       setUrl('');
-    } catch (error) {
-      console.error('投稿エラー:', error);
+    } catch (err) {
+      console.error('投稿エラー:', err);
       alert('投稿に失敗しました...');
     }
   };
+
+  // NewsPostPage.jsx が閉じられたらログアウトするように設定
+  const location = useLocation();
+  useEffect(() => {
+    const currentPath = location.pathname;
+
+    const unsubscribe = () => {
+      if (window.location.pathname !== currentPath) {
+        signOut(auth).catch((e) => console.error('ログアウト失敗:', e));
+      }
+    };
+
+    // イベントリスナー：ページ離脱時（ルート変更）
+    window.addEventListener('popstate', unsubscribe);
+    window.addEventListener('pushstate', unsubscribe);
+    window.addEventListener('beforeunload', unsubscribe);
+    return () => {
+      unsubscribe(); // ページがアンマウントされたときもログアウト
+      window.removeEventListener('popstate', unsubscribe);
+      window.removeEventListener('pushstate', unsubscribe);
+      window.removeEventListener('beforeunload', unsubscribe);
+    };
+  }, [location]);
+    
 
   return (
     <section className="max-w-3xl mx-auto py-10 px-4 md:px-20">
@@ -92,6 +127,12 @@ function NewsPostPage() {
             placeholder="https://example.com"
           />
         </div>
+        <select value={category} onChange={(e) => setCategory(e.target.value)} required className="w-full border border-gray-300 rounded px-3 py-2">
+          <option value="">-- カテゴリを選択 --</option>
+          <option value="一般お知らせ">一般お知らせ</option>
+          <option value="生徒向け">生徒向け</option>
+          <option value="メンテナンス">メンテナンス</option>
+        </select>
 
         <button
           type="submit"

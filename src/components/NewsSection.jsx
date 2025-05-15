@@ -1,27 +1,36 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
 import handloadingAnimation from '../assets/hand-loading.json';
+
+import { collection, getDocs, query, orderBy, limit } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const NewsSection = () => {
   const [newsList, setNewsList] = useState([]);
 
   useEffect(() => {
-    axios
-      .get('http://localhost/api/news_list.php?limit=3')
-      .then((response) => {
-        if (Array.isArray(response.data)) {
-          setNewsList(response.data);
-        } else {
-          console.error('返されたデータが配列ではありません:', response.data);
-        }
-      })
-      .catch((error) => {
+    const fetchNews = async () => {
+      try {
+        const q = query(
+          collection(db, 'news'),
+          orderBy('date_posted', 'desc'),
+          limit(3)
+        );
+        const snapshot = await getDocs(q);
+        const data = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setNewsList(data);
+      } catch (error) {
         console.error('データ取得エラー:', error);
-      });
+      }
+    };
+
+    fetchNews();
   }, []);
 
   const listVariants = {
@@ -49,7 +58,6 @@ const NewsSection = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1, ease: 'easeOut' }}
     >
-      {/* 内側の余白＆制限幅ラッパー */}
       <div className="w-full pt-8 px-4 md:px-20">
         <div className="w-full md:w-4/5 lg:w-3/5 mx-auto text-white">
           <motion.h2
@@ -81,9 +89,12 @@ const NewsSection = () => {
                     to={`/news/${news.id}`}
                     className="flex items-start md:items-center w-full hover:underline gap-2"
                   >
-                    <h5 className="text-lg md:text-md font-normal text-white ml-4">
-                      {news.title}
-                    </h5>
+                    <div className="flex flex-col ml-4">
+                      <p className="text-xs text-blue-400">{news.category}</p>
+                      <h5 className="text-lg md:text-md font-normal text-white">
+                        {news.title}
+                      </h5>
+                    </div>
                   </Link>
 
                   {index === newsList.length - 1 && (
@@ -104,7 +115,7 @@ const NewsSection = () => {
                   <Lottie animationData={handloadingAnimation} loop={true} />
                 </div>
                 <p className="mt-2 text-gray-300 text-sm animate-pulse">
-                  now loading.
+                  now loading...
                 </p>
               </div>
             )}

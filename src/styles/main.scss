@@ -77,6 +77,23 @@ body {
     }
 }
 
+// highlight setting
+.highlight-half {
+  display: inline-block;
+  position: relative;
+  z-index: 0;
+  &::after{
+    content: '';
+    position: absolute;
+    background-color: rgb(215, 209, 140);
+    left: 0;
+    right: 0;
+    top: 45%;
+    height: 45%;
+    z-index: -1; 
+  }
+}
+
 // light or dark mode button
 #back-mode-button{
     border-radius: 50%;
@@ -399,7 +416,7 @@ body {
     height: 100%;
     border: 1px solid #ccc;
     opacity: 0.75;
-    &.front  { background-color: #ccc; transform: rotateY(0deg) translateZ(100px); }
+    &.front  { background-color: #ccc; transform: rotateY(0deg) translateZ(100px);}
     &.right  { background-color: #feca57; transform: rotateY(90deg) translateZ(100px); }
     &.back   { background-color: #1dd1a1; transform: rotateY(180deg) translateZ(100px); }
     &.left   { background-color: #5f27cd; transform: rotateY(-90deg) translateZ(100px); }

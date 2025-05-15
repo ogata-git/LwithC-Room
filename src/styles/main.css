@@ -71,6 +71,22 @@ body {
   opacity: 0.1;
 }
 
+.highlight-half {
+  display: inline-block;
+  position: relative;
+  z-index: 0;
+}
+.highlight-half::after {
+  content: "";
+  position: absolute;
+  background-color: rgb(215, 209, 140);
+  left: 0;
+  right: 0;
+  top: 45%;
+  height: 45%;
+  z-index: -1;
+}
+
 #back-mode-button {
   border-radius: 50%;
   position: fixed;

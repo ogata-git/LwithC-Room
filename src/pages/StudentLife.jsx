@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { motion } from 'framer-motion';
 import { useState, useEffect, useMemo } from 'react';
+import { SmallSection01 } from '../components/SmallSection01';
 import banner from '../assets/images/life-top.jpg';
 import image1 from '../assets/images/student-lifeA-1.png'
 import image2 from '../assets/images/student-lifeA-2.png'
@@ -50,7 +51,7 @@ const sectionVariants = {
 
 const StudentLife = () => {
   return (
-    <div className="bg-gray-100/50 text-gray-800">
+    <div className="bg-gray-100/10 text-gray-800">
       {/* Page Header */}
       <div className="w-full overflow-hidden relative title-wrapper">
         <img
@@ -179,6 +180,10 @@ const StudentLife = () => {
             </div>
           </motion.section>
         </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-20 py-10">
+        <SmallSection01 title="よくある質問" subtitle="LwithCへのよくある質問をまとめました。" moreText="もっと見る" moreLink="/faq"/>
+        <SmallSection01 title="採用情報" subtitle="LwithCに力を貸していただけませんか？" moreText="もっと見る" moreLink="/recruit" /> 
       </div>
     </div>
   );

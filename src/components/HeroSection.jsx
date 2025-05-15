@@ -5,9 +5,9 @@ import image2 from '../assets/images/hero02.png';
 import image3 from '../assets/images/hero03.png';
 import image4 from '../assets/images/hero04.png';
 
-function ReasonsSection() {
+function HeroSection() {
   return (
-    <section className="py-16 md:py-24 lg:py-32 px-4 md:px-8 bg-gradient-to-r from-blue-100/40 to-white/25">
+    <section className="py-16 md:py-24 lg:py-32 px-4 md:px-30 bg-gradient-to-r from-blue-100/20 to-white/25">
       {/* タイトル */}
       <motion.h2
         className="text-3xl md:text-5xl lg:text-6xl font-bold text-center text-gray-900 mb-8 md:mb-12"
@@ -20,10 +20,10 @@ function ReasonsSection() {
 
       {/* セクション1 */}
       <motion.div
-        className="relative bg-cover bg-center overflow-hidden rounded-lg shadow-xl hover:shadow-2xl mb-8 md:mb-12 p-4 md:p-6 lg:p-8 transition-all"
+        className="relative bg-cover bg-center overflow-hidden rounded-lg shadow-xl hover:shadow-2xl mb-8 md:mb-12 p-4 md:p-6 lg:p-8 transition-all "
         style={{ backgroundImage: `url(${image1})` }}
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 0.9, y: 0 }}
         transition={{ delay: 0.2, duration: 0.8 }}
       >
         <div className="absolute inset-0 " />
@@ -50,7 +50,7 @@ function ReasonsSection() {
         className="relative bg-cover bg-center overflow-hidden rounded-lg shadow-xl hover:shadow-2xl mb-8 md:mb-12 p-4 md:p-6 lg:p-8 transition-all"
         style={{ backgroundImage: `url(${image2})` }}
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 0.9, y: 0 }}
         transition={{ delay: 0.4, duration: 0.8 }}
       >
         <div className="absolute inset-0 " />
@@ -74,10 +74,10 @@ function ReasonsSection() {
 
       {/* セクション3 */}
       <motion.div
-        className="relative bg-cover bg-center overflow-hidden rounded-lg shadow-xl hover:shadow-2xl mb-8 md:mb-12 p-4 md:p-6 lg:p-8 transition-all"
+        className="relative bg-cover bg-center overflow-hidden rounded-lg shadow-xl hover:shadow-2xl mb-8 md:mb-12 p-4 md:p-6 lg:p-8 transition-all "
         style={{ backgroundImage: `url(${image3})` }}
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 0.9, y: 0 }}
         transition={{ delay: 0.6, duration: 0.8 }}
       >
         <div className="absolute inset-0 opacity-90" />
@@ -93,7 +93,7 @@ function ReasonsSection() {
             to="/student-life"
             className="bg-gray-700 text-white px-4 md:px-6 py-2 md:py-3 rounded-full shadow-md hover:bg-gray-800 transition"
           >
-            詳細を見る
+            もっと見る
           </Link>
         </div>
       </motion.div>
@@ -103,7 +103,7 @@ function ReasonsSection() {
         className="relative bg-cover bg-center overflow-hidden rounded-lg shadow-xl hover:shadow-2xl mb-8 md:mb-12 p-4 md:p-6 lg:p-8 transition-all"
         style={{ backgroundImage: `url(${image4})` }}
         initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={{ opacity: 0.9, y: 0 }}
         transition={{ delay: 0.8, duration: 0.8 }}
       >
         <div className="absolute inset-0 " />
@@ -120,4 +120,4 @@ function ReasonsSection() {
   );
 }
 
-export default ReasonsSection;
+export default HeroSection;

@@ -73,7 +73,6 @@ export const SmallSection01 = ({ title, subtitle, moreText, moreLink }) => {
       </motion.div>
 
       <style>{`
-        /* 究極の超リアルメタリック質感 */
         .metal-container {
           position: relative;
           background-color: #333;

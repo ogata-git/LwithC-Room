@@ -1,6 +1,5 @@
-/* eslint-disable */
 import React, { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, useAnimation } from 'framer-motion';
 import '../styles/main.scss';
 import logo from '../assets/images/lwithc3.png';
@@ -70,31 +69,31 @@ function Footer({ onContactOpen }) {
         {/* リンク群 */}
         <div className="flex flex-col md:flex-row md:justify-between mt-4 md:mt-6 gap-6">
           <div className="flex flex-col md:w-1/2">
-            <a
-              href="#"
+            <Link
+              to="#"
               className="text-link-1 text-sm md:text-base mb-2 hover:text-gray-400"
               onClick={e => { e.preventDefault(); onContactOpen(); }}
             >
               Contact
-            </a>
-            <a href="#" className="text-link-1 text-sm md:text-base mb-2 hover:text-gray-400">
+            </Link>
+            <Link to="#" className="text-link-1 text-sm md:text-base mb-2 hover:text-gray-400">
               テキスト
-            </a>
-            <a href="/student-life" className="text-link-1 text-sm md:text-base hover:text-gray-400">
+            </Link>
+            <Link to="/student-life" className="text-link-1 text-sm md:text-base hover:text-gray-400">
               Life with LwithC
-            </a>
+            </Link>
           </div>
 
           <div className="flex flex-col md:w-1/2">
-            <a href="/service" className="text-link-1 text-sm md:text-base mb-2 hover:text-gray-400">
+            <Link to="/service" className="text-link-1 text-sm md:text-base mb-2 hover:text-gray-400">
               Service
-            </a>
-            <a href="/aboutus" className="text-link-1 text-sm md:text-base mb-2 hover:text-gray-400">
+            </Link>
+            <Link to="/aboutus" className="text-link-1 text-sm md:text-base mb-2 hover:text-gray-400">
               About Us
-            </a>
-            <a href="/privacy-policy" className="text-link-1 text-sm md:text-base hover:text-gray-400">
+            </Link>
+            <Link to="/privacy-policy" className="text-link-1 text-sm md:text-base hover:text-gray-400">
               Privacy Policy
-            </a>
+            </Link>
           </div>
         </div>
 

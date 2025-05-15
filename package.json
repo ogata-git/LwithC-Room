@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "proxy": "http://localhost",
-  "homepage": "https://ogata-git.github.io/LwithC-Room",
+  "homepage": "https://ogata-git.github.io/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -19,11 +19,14 @@
     "@tailwindcss/vite": "^4.1.4",
     "axios": "^1.9.0",
     "bootstrap": "^5.3.5",
+    "firebase": "^11.7.3",
     "framer-motion": "^12.9.2",
     "lottie-react": "^2.4.1",
     "motion": "^12.9.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-firebase-hooks": "^5.1.1",
+    "react-icons": "^5.5.0",
     "react-router-dom": "^7.5.2"
   },
   "devDependencies": {
@@ -33,7 +36,8 @@
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.21",
-    "eslint": "^9.22.0",
+    "eslint": "^9.26.0",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "gh-pages": "^6.3.0",
@@ -43,5 +47,19 @@
     "sass": "^1.87.0",
     "tailwindcss": "^4.1.4",
     "vite": "^6.3.1"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "react"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:react/recommended"
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
