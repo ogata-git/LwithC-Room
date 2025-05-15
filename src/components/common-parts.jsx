@@ -1,5 +1,6 @@
 import '../styles/main.scss';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function CommonParts({ onContactOpen }) {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -54,10 +55,10 @@ function CommonParts({ onContactOpen }) {
       >
         <div id="menu-content" className={menuOpen ? 'active1' : ''}>
           <ul className="menu-items">
-            <li><a href="/">Home</a></li>
-            <li><a href="/student-life">How's Life Going?</a></li>
-            <li><a href="/service">Service</a></li>
-            <li><a href="/aboutus">About Us</a></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/student-life">How's Life Going?</Link></li>
+          <li><Link to="/service">Service</Link></li>
+          <li><Link to="/aboutus">About Us</Link></li>
             <li>
               <a
                 href="#"

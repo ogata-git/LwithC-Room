@@ -8,7 +8,7 @@ function HomePage() {
       
       <div className="biz-udpmincho-regular">
         <h1>LwithCへようこそ</h1>
-        <p>自信を持って歩む人生のために</p>
+        
       </div>
       {/* トップページ専用のレイアウトやコンテンツを書く */}
       <HeroSection />
